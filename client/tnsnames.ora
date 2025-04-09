@@ -1,0 +1,16 @@
+APP_SVC =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = primary)(PORT = 1521))
+      (ADDRESS = (PROTOCOL = TCP)(HOST = standby)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      (SERVICE_NAME = app_svc)
+    )
+    (FAILOVER_MODE =
+      (TYPE = SELECT)
+      (METHOD = BASIC)
+      (RETRIES = 180)
+      (DELAY = 5)
+    )
+  )

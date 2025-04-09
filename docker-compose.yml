@@ -1,0 +1,33 @@
+version: '3'
+services:
+  primary:
+    build: ./primary
+    hostname: primary
+    container_name: oracle_primary
+    environment:
+      - ORACLE_PWD=oracle
+    volumes:
+      - ./client/tnsnames.ora:/opt/oracle/product/11.2.0/xe/network/admin/tnsnames.ora:ro
+    ports:
+      - "1521:1521"
+    networks:
+      - oracle_net
+
+  standby:
+    build: ./standby
+    hostname: standby
+    container_name: oracle_standby
+    environment:
+      - ORACLE_PWD=oracle
+    depends_on:
+      - primary
+    volumes:
+      - ./client/tnsnames.ora:/opt/oracle/product/11.2.0/xe/network/admin/tnsnames.ora:ro
+    ports:
+      - "1522:1521"
+    networks:
+      - oracle_net
+
+networks:
+  oracle_net:
+    driver: bridge

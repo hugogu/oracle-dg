@@ -1,0 +1,35 @@
+# 主库自身连接描述
+PRIMARY =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = primary)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = XE)  # Oracle XE默认服务名
+    )
+  )
+
+# 备库连接描述（用于Data Guard日志传输）
+STANDBY =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = standby)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SID = XE)            # Oracle XE默认SID
+    )
+  )
+
+# 应用服务名（TAF统一入口）
+APP_SVC =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = primary)(PORT = 1521))
+      (ADDRESS = (PROTOCOL = TCP)(HOST = standby)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      (SERVICE_NAME = APP_SVC)
+    )
+    (FAILOVER_MODE =
+      (TYPE = SELECT)
+      (METHOD = BASIC)
+    )
+  )
