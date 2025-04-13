@@ -1,5 +1,12 @@
 FROM oracleinanutshell/oracle-xe-11g:latest
 
+# 切换到 oracle 用户
+# USER oracle
+
+# 添加环境变量到容器
+ENV ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe \
+    PATH=$ORACLE_HOME/bin:$PATH
+
 # 复制配置文件和脚本
 COPY listener.ora /tmp/
 COPY tnsnames.ora /tmp/

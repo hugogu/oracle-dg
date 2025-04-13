@@ -8,7 +8,7 @@ LISTENER =
 SID_LIST_LISTENER =
   (SID_LIST =
     (SID_DESC =
-      (GLOBAL_DBNAME = APP_SVC)   # 匹配应用服务名
+      (GLOBAL_DBNAME = XE)   # 匹配应用服务名
       (ORACLE_HOME = /u01/app/oracle/product/11.2.0/xe)
       (SID_NAME = XE)             # Oracle XE默认SID
     )
